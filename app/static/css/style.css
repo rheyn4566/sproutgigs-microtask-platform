@@ -1,0 +1,173 @@
+/* General Body Styling */
+body {
+    background-color: #F0F0F0; /* Light grey/off-white */
+    font-family: Arial, Helvetica, sans-serif;
+    color: #333333; /* Dark grey */
+    margin: 0;
+    padding: 0;
+}
+
+/* Navigation Bar */
+nav {
+    background-color: #6A0DAD; /* Dark Purple (Grape) */
+    padding: 10px 0;
+    text-align: center;
+}
+
+nav a {
+    color: #FFFFFF; /* White */
+    text-decoration: none;
+    padding: 10px 15px;
+    margin: 0 5px;
+}
+
+nav a:hover {
+    background-color: #800080; /* Medium Purple */
+    color: #E6E6FA; /* Lavender */
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+    color: #6A0DAD; /* Dark Purple (Grape) */
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+/* Buttons */
+button, input[type="submit"] {
+    background-color: #9370DB; /* Vibrant Purple (MediumPurple) */
+    color: #FFFFFF; /* White */
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover, input[type="submit"]:hover {
+    background-color: #800080; /* Medium Purple */
+}
+
+/* Forms */
+form {
+    margin-bottom: 20px;
+}
+
+form p {
+    margin-bottom: 10px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    color: #6A0DAD; /* Dark Purple for labels */
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+textarea,
+input[type="number"] /* Added for reward field */ {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #E6E6FA; /* Lavender border */
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+textarea:focus,
+input[type="number"]:focus {
+    border-color: #9370DB; /* Vibrant Purple on focus */
+    outline: none;
+}
+
+/* Flashed Messages (Alerts) */
+.alert {
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    color: #FFFFFF;
+}
+
+.alert-success {
+    background-color: #28a745; /* Green */
+    border-color: #1e7e34;
+}
+
+.alert-danger {
+    background-color: #dc3545; /* Red */
+    border-color: #bd2130;
+}
+
+.alert-info {
+    background-color: #17a2b8; /* Blue */
+    border-color: #117a8b;
+}
+
+/* Ensure text is visible on colored backgrounds for alerts */
+.alert-success, .alert-danger, .alert-info {
+    color: #FFFFFF !important; /* Override default body text color if needed */
+}
+
+
+/* Content Area / Main Block */
+/* Assuming base.html has a structure like <main>{% block content %}{% endblock %}</main> or similar */
+/* For now, let's apply padding to where block content is typically rendered. */
+/* If the block content is directly inside body, this adds to body padding */
+/* If it's inside a specific div, that div should get a class */
+/* For now, let's assume a general content area might be a div or section directly under nav */
+/* This is a bit generic, better to have a wrapper div for content in HTML */
+body > div, body > main, body > section { /* Trying to target a main content wrapper */
+    padding: 20px;
+}
+/* If the content is just loose in body after nav, we can add padding to a common container for pages */
+/* For example, if each page template's content block is wrapped in a div: */
+.content-wrapper { /* Hypothetical class for {% block content %} wrapper */
+    padding: 20px;
+    margin: 20px;
+    background-color: #FFFFFF;
+    border-radius: 5px;
+}
+
+
+/* Links (general <a> tags outside nav) */
+a {
+    color: #800080; /* Medium Purple */
+    text-decoration: none;
+}
+
+a:hover {
+    color: #6A0DAD; /* Dark Purple */
+    text-decoration: underline;
+}
+
+/* Specific overrides for links that should not be purple, if any */
+/* For example, if some links in content need to be different */
+nav a { /* Re-assert nav link color if general 'a' overrides it */
+    color: #FFFFFF;
+    text-decoration: none; /* Ensure no underline from general 'a' */
+}
+nav a:hover {
+    background-color: #800080;
+    color: #E6E6FA;
+    text-decoration: none; /* Ensure no underline from general 'a:hover' */
+}
+
+/* Ensure form labels for checkboxes are aligned well */
+input[type="checkbox"] + label {
+    display: inline-block;
+    margin-left: 5px;
+    font-weight: normal; /* Checkbox labels usually not bold */
+    color: #333333; /* Default text color for checkbox labels */
+}
+hr {
+    border: none;
+    border-top: 1px solid #E6E6FA; /* Lavender for horizontal rules */
+    margin: 20px 0;
+}
