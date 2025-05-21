@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+    <h2>{{ title }}</h2>
+    {% if tasks %}
+        <ul>
+            {% for task in tasks %}
+                <li>
+                    <h3>{{ task.title }}</h3>
+                    <p><strong>Description:</strong> {{ task.description }}</p>
+                    <p><strong>Reward:</strong> ${{ "%.2f"|format(task.reward) }}</p>
+                    <p><small>Posted on: {{ task.created_at.strftime('%Y-%m-%d %H:%M') }}</small></p>
+                    {# To display employer's username, we'd need to ensure task.employer is accessible and loaded #}
+                    {# e.g., if task.employer relationship exists: <p><small>Posted by: {{ task.employer.username }}</small></p> #}
+                </li>
+                <hr>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No tasks available at the moment.</p>
+    {% endif %}
+{% endblock %}
