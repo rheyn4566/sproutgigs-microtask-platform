@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+    <h2>{{ title }}</h2>
+    <p>Browse tasks by category to find work that matches your skills.</p>
+    
+    {% if categories %}
+        <div class="category-grid">
+            {% for category in categories %}
+                <div class="category-card">
+                    <h3>
+                        <a href="{{ url_for('tasks', category=category.id) }}">{{ category.name }}</a>
+                    </h3>
+                    {% if category.description %}
+                        <p>{{ category.description }}</p>
+                    {% endif %}
+                    <p class="task-count">
+                        {{ category.tasks|length }} task{% if category.tasks|length != 1 %}s{% endif %} available
+                    </p>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>No categories available at the moment.</p>
+    {% endif %}
+{% endblock %}

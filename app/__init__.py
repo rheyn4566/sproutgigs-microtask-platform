@@ -27,7 +27,7 @@ def create_app():
         # No, it needs to be explicit if load_user is to work reliably before first request potentially.
         # The models need to be known to SQLAlchemy before create_all.
         # The original structure had `from .models import User` here, which is good.
-        from .models import User, Task # Ensure Task model is imported
+        from .models import User, Task, Category  # Ensure all models are imported
         db.create_all()  # Create database tables
 
     return app

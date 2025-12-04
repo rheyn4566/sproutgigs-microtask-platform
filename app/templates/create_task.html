@@ -18,6 +18,13 @@
             {% endfor %}
         </p>
         <p>
+            {{ form.category.label }}<br>
+            {{ form.category() }}<br>
+            {% for error in form.category.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
             {{ form.reward.label }}<br>
             {{ form.reward() }}<br>
             {% for error in form.reward.errors %}
