@@ -1,21 +1,50 @@
 {% extends "base.html" %}
 {% block content %}
     <h2>{{ title }}</h2>
+    
+    <!-- Category Filter -->
+    <div class="category-filter">
+        <h4>Filter by Category:</h4>
+        <form method="GET" action="{{ url_for('tasks') }}" class="filter-form">
+            {{ filter_form.category() }}
+            {{ filter_form.submit() }}
+        </form>
+        
+        <!-- Quick filter links -->
+        <div class="category-links">
+            <a href="{{ url_for('tasks') }}" class="category-link {% if selected_category == 0 %}active{% endif %}">All</a>
+            {% for category in categories %}
+                <a href="{{ url_for('tasks', category=category.id) }}"
+                   class="category-link {% if selected_category == category.id %}active{% endif %}">
+                    {{ category.name }}
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+    
+    <hr>
+    
     {% if tasks %}
-        <ul>
+        <ul class="task-list">
             {% for task in tasks %}
-                <li>
+                <li class="task-item">
                     <h3>{{ task.title }}</h3>
+                    {% if task.category %}
+                        <p class="task-category">
+                            <span class="category-badge">{{ task.category.name }}</span>
+                        </p>
+                    {% endif %}
                     <p><strong>Description:</strong> {{ task.description }}</p>
                     <p><strong>Reward:</strong> ${{ "%.2f"|format(task.reward) }}</p>
                     <p><small>Posted on: {{ task.created_at.strftime('%Y-%m-%d %H:%M') }}</small></p>
-                    {# To display employer's username, we'd need to ensure task.employer is accessible and loaded #}
-                    {# e.g., if task.employer relationship exists: <p><small>Posted by: {{ task.employer.username }}</small></p> #}
                 </li>
                 <hr>
             {% endfor %}
         </ul>
     {% else %}
-        <p>No tasks available at the moment.</p>
+        <p>No tasks available{% if selected_category > 0 %} in this category{% endif %}.</p>
+        {% if selected_category > 0 %}
+            <p><a href="{{ url_for('tasks') }}">View all tasks</a></p>
+        {% endif %}
     {% endif %}
 {% endblock %}

@@ -1,6 +1,7 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, BooleanField, TextAreaField, FloatField
-from wtforms.validators import DataRequired, Length, Email, EqualTo
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, TextAreaField, FloatField, SelectField
+from wtforms.validators import DataRequired, Length, Email, EqualTo, Optional
+
 
 class RegistrationForm(FlaskForm):
     username = StringField('Username',
@@ -25,5 +26,12 @@ class TaskForm(FlaskForm):
     title = StringField('Title',
                         validators=[DataRequired(), Length(min=5, max=100)])
     description = TextAreaField('Description', validators=[DataRequired()])
-    reward = FloatField('Reward', validators=[DataRequired()]) # Add NumberRange(min=0) for positive?
+    reward = FloatField('Reward', validators=[DataRequired()])
+    category = SelectField('Category', coerce=int, validators=[Optional()])
     submit = SubmitField('Create Task')
+
+
+class TaskFilterForm(FlaskForm):
+    """Form for filtering tasks by category."""
+    category = SelectField('Filter by Category', coerce=int, validators=[Optional()])
+    submit = SubmitField('Filter')
